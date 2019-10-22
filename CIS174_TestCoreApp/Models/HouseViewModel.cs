@@ -8,24 +8,19 @@ namespace CIS174_TestCoreApp.Models
 {
     public class HouseViewModel
     {
-        [Required]
-        [StringLength(25)]
-        [Display(Name = "Bedrooms")]
-        public string Bedrooms { get; set; }
 
-        [Required]
-        [StringLength(25)]
-        [Display(Name = "Square Feet")]
-        public string SquareFeet { get; set; }
+        public int id { get; set; }
 
-        [Required]
-        [StringLength(25)]
-        [Display(Name = "Date Built")]
-        public string DateBuilt { get; set; }
 
-        [Required]
-        [StringLength(25)]
-        [Display(Name = "Flooring")]
+        public int Bedrooms { get; set; }
+
+
+        public int SquareFeet { get; set; }
+
+
+        public DateTime DateBuilt { get; set; }
+
+
         public string Flooring { get; set; }
     }
 }

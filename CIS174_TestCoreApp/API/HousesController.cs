@@ -2,53 +2,48 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CIS174_TestCoreApp.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CIS174_TestCoreApp.API
 {
+    [Route("api/House")]
     public class HousesController : Controller
     {
-        List<string> _one = new List<string>
+        HouseViewModel _houseOne = new HouseViewModel()
         {
-            "Bedrooms = 4",
-            "SquareFeet = 1854",
-            "DateBuilt = 05/28/1973",
-            "Flooring = Carpet"
+            id = 1,
+            Bedrooms = 4,
+            SquareFeet = 1854,
+            DateBuilt = new DateTime(1973, 05, 28),
+            Flooring = "Carpet"
         };
-        public IEnumerable<string> Index()
-        {
-            return _one;
-        }
-        public IActionResult View(int id)
-        {
-            if (id >= 0 && id < _one.Count)
-            {
-                return Ok(_one[id]);
-            }
-            return NotFound();
-        }
-    }
 
-    public class HouseController : Controller
-    {
-        List<string> _two = new List<string>
+        HouseViewModel _houseTwo = new HouseViewModel()
         {
-            "Bedrooms = 3",
-            "SquareFeet = 1675",
-            "DateBuilt = 10/17/2015",
-            "Flooring = Hardwood"
+            id = 2,
+            Bedrooms = 3,
+            SquareFeet = 1675,
+            DateBuilt = new DateTime(2015, 10, 17),
+            Flooring = "Hardwood"
         };
-        public IEnumerable<string> Index()
+
+        [HttpGet]
+        public IActionResult Get()
         {
-            return _two;
-        }
-        public IActionResult View(int id)
-        {
-            if (id >= 0 && id < _two.Count)
+            IEnumerable<HouseViewModel> Houses = new List<HouseViewModel>()
             {
-                return Ok(_two[id]);
-            }
-            return NotFound();
+            _houseOne, _houseTwo
+            };
+
+            return Ok(Houses);
+        }
+
+
+        [HttpPost("create")]
+        public IActionResult Create([FromBody] HouseViewModel house)
+        {
+            return Ok(house);
         }
     }
 }
